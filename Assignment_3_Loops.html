@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment #3 - Loops</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+      }
+      .box {
+          width: 420px;
+          margin: 30px auto;
+          padding: 20px;
+          background-color: white;
+          border: 1px solid #999;
+      }
+      h1 {
+          text-align: center;
+          font-size: 24px;
+      }
+      input {
+          width: 120px;
+          padding: 4px;
+      }
+      button {
+          padding: 4px 10px;
+          margin-top: 8px;
+      }
+      #result {
+          margin-top: 15px;
+          line-height: 1.6;
+      }
+    </style>
+  </head>
+<body>  
+
+  <div class="box">
+    <h1>First N Natural Numbers</h1>
+
+    Enter N: <input type="number" id="n">
+    <br>
+    <button onclick="factorial()">Factorial</button>
+    <button onclick="sum()">Sum</button>
+    <button onclick="average()">Average</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function getN() {
+      let n = document.getElementById("n").value;
+      if (n == "" || n < 1 || n != Math.floor(n)) {
+          document.getElementById("result").innerHTML = "Please enter a positive whole number.";
+          return -1;
+      }
+      return parseInt(n);
+    }
+
+    // factorial using while loop
+    function factorial() {
+        let n = getN();
+        if (n == -1) {
+            return;
+        }
+
+        let i = 1;
+        let fact = 1;
+        let steps = "";
+
+        while (i <= n) {
+            fact = fact * i;
+            steps = steps + i;
+            if (i < n) {
+                steps = steps + " x ";
+            }
+            i++;
+        }
+
+        document.getElementById("result").innerHTML =
+            "Factorial (while loop)<br>" +
+            n + "! = " + steps + " = " + fact;
+    }
+
+    // sum using do while loop
+    function sum() {
+        let n = getN();
+        if (n == -1) {
+            return;
+        }
+
+        let i = 1;
+        let total = 0;
+        let steps = "";
+
+        do {
+            total = total + i;
+            steps = steps + i;
+            if (i < n) {
+                steps = steps + " + ";
+            }
+            i++;
+        } while (i <= n);
+
+        document.getElementById("result").innerHTML =
+            "Sum (do while loop)<br>" +
+            steps + " = " + total;
+    }
+
+    // average using for loop
+    function average() {
+        let n = getN();
+        if (n == -1) {
+            return;
+        }
+
+        let total = 0;
+
+        for (var i = 1; i <= n; i++) {
+            total = total + i;
+        }
+
+        let ave = total / n;
+
+        document.getElementById("result").innerHTML =
+            "Average (for loop)<br>" +
+            "Sum = " + total + "<br>" +
+            "Average = " + total + " / " + n + " = " + ave.toFixed(2);
+    }
+    </script>
+  </body>
+</html>

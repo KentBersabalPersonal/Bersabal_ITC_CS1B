@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment #4 - Simple Payroll</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .box {
+            width: 420px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #999;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        input {
+            width: 180px;
+            padding: 4px;
+            margin-bottom: 8px;
+        }
+
+        button {
+            padding: 4px 10px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        #result {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h1>Simple Payroll</h1>
+
+        Employee Name: <br>
+        <input type="text" id="name"><br>
+
+        Hours Worked: <br>
+        <input type="number" id="hours"><br>
+
+        Rate per Hour: <br>
+        <input type="number" id="rate"><br>
+
+        <button onclick="computePay()">Compute</button>
+        <button onclick="clearAll()">Clear</button>
+
+        <div id="result">
+            <span>Employee: ?</span><br>
+            Regular Pay (hrs): ?<br>
+            Overtime Pay (hrs): ?<br>
+            Gross Pay: ?<br>
+            SSS (4.5%): ?<br>
+            PhilHealth (2.5%): ?<br>
+            Pag-IBIG (2%): ?<br>
+            Total Deductions: ?<br>
+            <span>Net Pay: ?</span>
+        </div>
+    </div>
+
+    <script>
+        function computePay() {
+            let name = document.getElementById("name").value.trim();
+            let hours = document.getElementById("hours").value;
+            let rate = document.getElementById("rate").value;
+
+            if (name == "" || hours == "" || rate == "" || hours <= 0 || rate <= 0) {
+                document.getElementById("result").innerHTML = "Please fill in all fields with valid values.";
+                return;
+            }
+
+            hours = parseFloat(hours);
+            rate = parseFloat(rate);
+
+            let regHours;
+            let otHours;
+
+            // First 40 hours is regular, anything more is overtime (1.5x)
+            if (hours > 40) {
+                regHours = 40;
+                otHours = hours - 40;
+            } else {
+                regHours = hours;
+                otHours = 0;
+            }
+
+            let regPay = regHours * rate;
+            let otPay = otHours * rate * 1.5;
+            let gross = regPay + otPay;
+
+            // Deductions
+            let sss = gross * 0.045;
+            let philhealth = gross * 0.025;
+            let pagibig = gross * 0.02;
+            let totalDed = sss + philhealth + pagibig;
+
+            let net = gross - totalDed;
+
+            document.getElementById("result").innerHTML =
+                "<b>Employee: " + name + "</b><br>" +
+                "Regular Pay (" + regHours + " hrs): PHP " + regPay.toFixed(2) + "<br>" +
+                "Overtime Pay (" + otHours + " hrs): PHP " + otPay.toFixed(2) + "<br>" +
+                "Gross Pay: PHP " + gross.toFixed(2) + "<br>" +
+                "SSS (4.5%): PHP " + sss.toFixed(2) + "<br>" +
+                "PhilHealth (2.5%): PHP " + philhealth.toFixed(2) + "<br>" +
+                "Pag-IBIG (2%): PHP " + pagibig.toFixed(2) + "<br>" +
+                "Total Deductions: PHP " + totalDed.toFixed(2) + "<br>" +
+                "<b>Net Pay: PHP " + net.toFixed(2) + "</b>";
+        }
+
+        function clearAll() {
+            document.getElementById("name").value = "";
+            document.getElementById("hours").value = "";
+            document.getElementById("rate").value = "";
+
+            document.getElementById("result").innerHTML =
+                "<span>Employee: ?</span><br>" +
+                "Regular Pay (hrs): ?<br>" +
+                "Overtime Pay (hrs): ?<br>" +
+                "Gross Pay: ?<br>" +
+                "SSS (4.5%): ?<br>" +
+                "PhilHealth (2.5%): ?<br>" +
+                "Pag-IBIG (2%): ?<br>" +
+                "Total Deductions: ?<br>" +
+                "<span>Net Pay: ?</span>";
+        }
+    </script>
+  </body>
+</html>

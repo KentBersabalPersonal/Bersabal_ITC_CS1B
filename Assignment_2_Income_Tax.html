@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment #2 - Income Tax Calculator</title>
+    <style>
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      }
+      .box {
+          width: 420px;
+          margin: 30px auto;
+          padding: 20px;
+          background-color: white;
+          border: 1px solid #999;
+      }
+      h1 {
+          text-align: center;
+          font-size: 24px;
+      }
+      input {
+          width: 180px;
+          padding: 4px;
+      }
+      button {
+          padding: 4px 10px;
+      }
+      table {
+          margin-top: 15px;
+          border-collapse: collapse;
+          width: 100%;
+      }
+      td, th {
+          border: 1px solid #999;
+          padding: 4px;
+          text-align: left;
+          font-size: 14px;
+      }
+      #result {
+          margin-top: 15px;
+          line-height: 1.6;
+      }
+    </style>
+  </head>
+<body>
+
+  <div class="box">
+    <h1>Income Tax Calculator</h1>
+
+     Annual Taxable Income: <br>
+    <input type="number" id="income" placeholder="Enter income in PHP">
+    <button onclick="computeTax()">Compute</button>
+
+    <div id="result">Annual Income: PHP ? <br> Income Tax: PHP ? <br> Income After Tax: PHP ?
+    </div>
+
+    <table>
+        <tr>
+            <th>Annual Income</th>
+            <th>Tax</th>
+        </tr>
+        <tr>
+            <td>250,000 and below</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Over 250,000 to 400,000</td>
+            <td>15% of the excess over 250,000</td>
+        </tr>
+        <tr>
+            <td>Over 400,000 to 800,000</td>
+            <td>22,500 + 20% of the excess over 400,000</td>
+        </tr>
+        <tr>
+            <td>Over 800,000 to 2,000,000</td>
+            <td>102,500 + 25% of the excess over 800,000</td>
+        </tr>
+        <tr>
+            <td>Over 2,000,000 to 8,000,000</td>
+            <td>402,500 + 30% of the excess over 2,000,000</td>
+        </tr>
+        <tr>
+            <td>Over 8,000,000</td>
+            <td>2,202,500 + 35% of the excess over 8,000,000</td>
+        </tr>
+    </table>
+  </div>
+
+    <script>
+      function computeTax() {
+        let income = document.getElementById("income").value;
+        let tax;
+
+        if (income == "" || income < 0) {
+            document.getElementById("result").innerHTML = "Please enter a valid income.";
+            return;
+        }
+
+        income = parseFloat(income);
+
+        if (income <= 250000) {
+            tax = 0;
+        } else if (income <= 400000) {
+            tax = (income - 250000) * 0.15;
+        } else if (income <= 800000) {
+            tax = 22500 + (income - 400000) * 0.20;
+        } else if (income <= 2000000) {
+            tax = 102500 + (income - 800000) * 0.25;
+        } else if (income <= 8000000) {
+            tax = 402500 + (income - 2000000) * 0.30;
+        } else {
+            tax = 2202500 + (income - 8000000) * 0.35;
+        }
+
+        let net = income - tax;
+
+        document.getElementById("result").innerHTML =
+            "Annual Income: PHP " + income.toFixed(2) + "<br>" +
+            "Income Tax: PHP " + tax.toFixed(2) + "<br>" +
+            "Income After Tax: PHP " + net.toFixed(2);
+    }
+    </script>
+  </body>
+</html>
