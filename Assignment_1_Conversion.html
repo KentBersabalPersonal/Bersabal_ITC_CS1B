@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--Sir, I will put the HTML, CSS, and JavaScript code for each assignment in a single file. 
+This will make it easier to run and manage the projects using my own GitHub repository.-->
 <html lang="en">
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment #1 - Conversion</title>
-      <style>
+      <style> 
         body {
           font-family: Arial, sans-serif;
           background-color: #f2f2f2;
@@ -86,7 +87,7 @@
           return;
       }
       f = parseFloat(f);
-      var c = (f - 32) * 5 / 9;
+      var c = (f - 32) * 5 / 9; // FORMULA SA Fahrenheit TO Celsius
       document.getElementById("resultFahrenheitCelsius").innerHTML = f + " &deg;F = " + c.toFixed(2) + " &deg;C";
   }
 
@@ -97,7 +98,7 @@
           return;
       }
       m = parseFloat(m);
-      var ft = m * 3.28084;
+      var ft = m * 3.28084; // FORMULA SA Meters TO Feet
       document.getElementById("resultMetersFeet").innerHTML = m + " m = " + ft.toFixed(2) + " ft";
   }
 
@@ -108,7 +109,7 @@
           return;
       }
       ft = parseFloat(ft);
-      var m = ft / 3.28084;
+      var m = ft / 3.28084; // FORMULA SA Feet TO Meters
       document.getElementById("resultFeetMeters").innerHTML = ft + " ft = " + m.toFixed(2) + " m";
   }
 
