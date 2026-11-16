@@ -7,3 +7,5 @@ Assignment #2 - Income Tax Calculator
 Assignment #3 - Factorial (While Loop), Sum (Do While Loop) and Average (For Loop) of First N Natural Numbers
 
 Assignment #4 - Simple Payroll
+
+Index.html - The Personal Website That Contains All Of The Assignments <3
